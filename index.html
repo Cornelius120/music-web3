@@ -44,26 +44,77 @@
       <div class="player-controls-container">
         <div class="controls">
           <button id="prev-btn" class="ctrl-btn">
-            <img
-              src="icons/previous.svg"
-              alt="Previous"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
               width="24"
               height="24"
-            />
+            >
+              <path
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 20L9 12l10-8v16zM5 19V5"
+              ></path>
+            </svg>
           </button>
 
           <button id="play-btn" class="ctrl-btn play-main">
-            <img
-              src="icons/play-button.svg"
-              alt="Play"
+            <svg
+              id="icon-play"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32.93 37.75"
               width="40"
               height="40"
-              id="play-icon"
-            />
+              style="display: block"
+            >
+              <path
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.75"
+                d="M.88 18.88v-18l15.58 9 15.59 9-15.59 9-15.58 9v-18z"
+              ></path>
+            </svg>
+
+            <svg
+              id="icon-pause"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 28.75 37.75"
+              width="40"
+              height="40"
+              style="display: none"
+            >
+              <path
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.75"
+                d="M.87.87h9v36h-9zM18.87.87h9v36h-9z"
+              ></path>
+            </svg>
           </button>
 
           <button id="next-btn" class="ctrl-btn">
-            <img src="icons/next.svg" alt="Next" width="24" height="24" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 4l10 8-10 8V4zM19 5v14"
+              ></path>
+            </svg>
           </button>
         </div>
         <div class="progress-container" id="progress-container">

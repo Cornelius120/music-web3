@@ -285,3 +285,124 @@ body {
         /* Sembunyikan kontrol ekstra di HP agar lega */
     }
 }
+
+/* Kode ini diletakkan di C:\Users\User\Downloads\music-web3\css\style.css */
+
+/* ... [PASTIKAN KODE CSS SEBELUMNYA TETAP ADA DI SINI] ... */
+/* Jika kamu menimpa semua, ini adalah tambahan untuk Tampilan Detail */
+
+/* --- TATA LETAK DETAIL LAGU --- */
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: var(--text-primary);
+}
+
+.detail-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.detail-left {
+    flex: 0 0 300px;
+    /* Ukuran cover lebih besar di halaman detail */
+}
+
+.detail-left img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.detail-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#detail-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+#detail-artist {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.song-desc {
+    color: #cccccc;
+    line-height: 1.6;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.lyrics-section h4,
+.recommendation-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+.lyrics-box {
+    white-space: pre-wrap;
+    /* Agar enter pada lirik terbaca */
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 15px;
+    font-style: italic;
+}
+
+/* Kustomisasi Scrollbar untuk Lirik */
+.lyrics-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lyrics-box::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+/* --- RESPONSIVITAS (MOBILE) --- */
+@media screen and (max-width: 768px) {
+    /* ... [Kode responsif sebelumnya] ... */
+
+    .detail-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .detail-left {
+        flex: 0 0 250px;
+    }
+
+    .lyrics-section h4,
+    .recommendation-section h4 {
+        text-align: left;
+    }
+
+    .lyrics-box {
+        text-align: left;
+    }
+}

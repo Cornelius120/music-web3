@@ -1,26 +1,28 @@
-// Kode ini diletakkan di C:\Users\User\Downloads\music-web3\js\data.js
+// Kode ini diletakkan di music-web3/js/data.js
 
-// Database lagu dipisah ke file ini agar rapi
 const playlist = [
   {
-    title: "Lagu Pertama",
-    artist: "Artis A",
-    genre: "Pop", // Tambahan genre
+    title: "Mountain Breeze",
+    artist: "Acoustic Nature",
+    genre: "Acoustic",
     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    cover: "https://via.placeholder.com/150/FF0000/FFFFFF?text=Cover+1",
+    cover:
+      "https://images.unsplash.com/photo-1493225457124-a1a2a5f5f9af?auto=format&fit=crop&w=150&q=80",
   },
   {
-    title: "Lagu Kedua",
-    artist: "Artis B",
-    genre: "Rock", // Tambahan genre
+    title: "Neon City Lights",
+    artist: "Synthwave Boy",
+    genre: "Electronic",
     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    cover: "https://via.placeholder.com/150/0000FF/FFFFFF?text=Cover+2",
+    cover:
+      "https://images.unsplash.com/photo-1614149162883-504ce4d13909?auto=format&fit=crop&w=150&q=80",
   },
   {
-    title: "Lagu Ketiga",
-    artist: "Artis C",
-    genre: "Jazz", // Tambahan genre
+    title: "Midnight Jazz",
+    artist: "The Smooth Tones",
+    genre: "Jazz",
     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    cover: "https://via.placeholder.com/150/00FF00/FFFFFF?text=Cover+3",
+    cover:
+      "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=150&q=80",
   },
 ];

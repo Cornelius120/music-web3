@@ -1,0 +1,180 @@
+/* Kode ini diletakkan di C:\Users\User\Downloads\music-web3\css\style.css */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Layout Utama */
+.app-container {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 90px); /* Dikurangi tinggi bottom player */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: #000000;
+    padding: 20px;
+    border-right: 1px solid #222;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.sidebar li:hover, .sidebar li.active {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+/* Konten Utama */
+.main-content {
+    flex: 1;
+    background-color: #0a0a0a; /* Sedikit lebih terang dari hitam pekat */
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* Daftar Lagu */
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #121212;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.song-item:hover {
+    background-color: #2a2a2a;
+}
+
+.song-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.song-item h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.song-item p {
+    margin: 3px 0 0 0;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* Bottom Player */
+.bottom-player {
+    height: 90px;
+    background-color: #212121;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-top: 1px solid #333;
+}
+
+.player-track-info {
+    display: flex;
+    align-items: center;
+    width: 250px;
+}
+
+.player-track-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.track-details h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.track-details p {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.player-controls-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.play-main {
+    font-size: 2rem;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: #555;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #fff;
+    width: 0%;
+    border-radius: 2px;
+}
+
+.player-extra {
+    width: 250px;
+    text-align: right;
+}

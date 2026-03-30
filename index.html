@@ -12,7 +12,7 @@
         <h1 class="brand-logo">🎵 MiyaMusic</h1>
         <nav class="nav-menu">
           <ul>
-            <li class="active">Beranda</li>
+            <li class="active" id="nav-beranda">Beranda</li>
             <li>Eksplorasi</li>
             <li>Koleksi Favorit</li>
           </ul>
@@ -20,16 +20,57 @@
       </aside>
 
       <main class="main-content">
-        <header class="top-header">
-          <h2>Daftar Putar Kamu</h2>
-        </header>
+        <div id="home-view">
+          <header class="top-header">
+            <h2>Daftar Putar Kamu</h2>
+          </header>
+          <div class="song-list-container" id="song-list"></div>
+        </div>
 
-        <div class="song-list-container" id="song-list"></div>
+        <div id="detail-view" style="display: none">
+          <button id="back-btn" class="back-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path
+                fill="currentColor"
+                d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+              />
+            </svg>
+            Kembali
+          </button>
+
+          <div class="detail-layout">
+            <div class="detail-left">
+              <img id="detail-cover" src="" alt="Album Cover" />
+            </div>
+            <div class="detail-right">
+              <h2 id="detail-title">Judul Lagu</h2>
+              <h3 id="detail-artist">Nama Artis</h3>
+              <p id="detail-desc" class="song-desc">
+                Deskripsi lagu akan muncul di sini.
+              </p>
+
+              <div class="lyrics-section">
+                <h4>Lirik</h4>
+                <div id="detail-lyrics" class="lyrics-box"></div>
+              </div>
+
+              <div class="recommendation-section">
+                <h4>Rekomendasi Serupa</h4>
+                <div id="recommendation-list" class="song-list-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
     <footer class="bottom-player">
-      <div class="track-info">
+      <div
+        class="track-info"
+        id="bottom-track-info"
+        style="cursor: pointer"
+        title="Klik untuk lihat detail"
+      >
         <img
           id="player-cover"
           src="https://via.placeholder.com/60"
@@ -48,7 +89,6 @@
               <path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
             </svg>
           </button>
-
           <button id="play-pause-btn" class="btn-icon btn-main">
             <svg id="icon-play" viewBox="0 0 24 24" width="36" height="36">
               <path fill="currentColor" d="M8 5v14l11-7z" />
@@ -63,7 +103,6 @@
               <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
             </svg>
           </button>
-
           <button id="next-btn" class="btn-icon">
             <svg viewBox="0 0 24 24" width="24" height="24">
               <path
@@ -73,7 +112,6 @@
             </svg>
           </button>
         </div>
-
         <div class="progress-wrapper" id="progress-wrapper">
           <div class="progress-bar" id="progress-bar"></div>
         </div>

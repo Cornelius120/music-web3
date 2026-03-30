@@ -8,6 +8,7 @@ const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 const progress = document.getElementById("progress");
 const progressContainer = document.getElementById("progress-container");
+const playIcon = document.getElementById("play-icon");
 
 // Elemen info lagu di player bawah
 const playerTitle = document.getElementById("player-title");
@@ -55,13 +56,15 @@ function loadSong(song) {
 function playSong() {
   audioPlayer.play();
   isPlaying = true;
-  playBtn.innerText = "⏸";
+  // Ubah sumber gambar (src) menjadi ikon pause
+  playIcon.src = "icons/pause.svg";
 }
 
 function pauseSong() {
   audioPlayer.pause();
   isPlaying = false;
-  playBtn.innerText = "▶";
+  // Ubah sumber gambar (src) kembali menjadi ikon play
+  playIcon.src = "icons/play-button.svg";
 }
 
 playBtn.addEventListener("click", () => {

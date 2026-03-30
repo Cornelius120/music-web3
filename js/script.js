@@ -1,16 +1,18 @@
-// Kode ini diletakkan di C:\Users\User\Downloads\music-web3\js\script.js
+// Kode ini diletakkan di music-web3/js/script.js
 
+// Deklarasi Elemen DOM
 const songListContainer = document.getElementById("song-list");
 const audioPlayer = document.getElementById("audio-player");
-const playBtn = document.getElementById("play-btn");
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-const progress = document.getElementById("progress");
-const progressContainer = document.getElementById("progress-container");
 
-// PERBAIKAN: Tangkap elemen SVG Play dan Pause secara terpisah
+const prevBtn = document.getElementById("prev-btn");
+const playPauseBtn = document.getElementById("play-pause-btn");
+const nextBtn = document.getElementById("next-btn");
+
 const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
+
+const progressBar = document.getElementById("progress-bar");
+const progressWrapper = document.getElementById("progress-wrapper");
 
 const playerTitle = document.getElementById("player-title");
 const playerArtist = document.getElementById("player-artist");
@@ -19,102 +21,113 @@ const playerCover = document.getElementById("player-cover");
 let currentSongIndex = 0;
 let isPlaying = false;
 
-function renderSongList() {
+// 1. Fungsi Merender Daftar Lagu
+function initPlaylist() {
   songListContainer.innerHTML = "";
+
   playlist.forEach((song, index) => {
-    const songDiv = document.createElement("div");
-    songDiv.classList.add("song-item");
-    songDiv.innerHTML = `
-            <img src="${song.cover}" alt="cover">
-            <div style="flex: 1;">
+    const songElement = document.createElement("div");
+    songElement.classList.add("song-card");
+
+    songElement.innerHTML = `
+            <img src="${song.cover}" alt="${song.title}">
+            <div class="song-card-info">
                 <h4>${song.title}</h4>
-                <p>${song.artist} • <span style="color: #1db954; font-size: 0.75rem;">${song.genre}</span></p>
+                <p>${song.artist}</p>
+                <span class="song-genre">${song.genre}</span>
             </div>
         `;
-    songDiv.addEventListener("click", () => {
+
+    songElement.addEventListener("click", () => {
       currentSongIndex = index;
-      loadSong(playlist[currentSongIndex]);
-      playSong();
+      loadSongDetails(playlist[currentSongIndex]);
+      playMusic();
     });
-    songListContainer.appendChild(songDiv);
+
+    songListContainer.appendChild(songElement);
   });
 }
 
-function loadSong(song) {
-  playerTitle.innerText = song.title;
-  playerArtist.innerText = song.artist;
+// 2. Fungsi Memuat Data Lagu ke Player Bawah
+function loadSongDetails(song) {
+  playerTitle.textContent = song.title;
+  playerArtist.textContent = song.artist;
   playerCover.src = song.cover;
   audioPlayer.src = song.src;
 }
 
-// 3. PERBAIKAN: Fungsi Play dan Pause menggunakan display none/block
-function playSong() {
+// 3. Fungsi Kontrol Putar dan Jeda
+function playMusic() {
   audioPlayer.play();
   isPlaying = true;
-  // Sembunyikan ikon Play, Tampilkan ikon Pause
   iconPlay.style.display = "none";
   iconPause.style.display = "block";
 }
 
-function pauseSong() {
+function pauseMusic() {
   audioPlayer.pause();
   isPlaying = false;
-  // Sembunyikan ikon Pause, Tampilkan ikon Play
   iconPlay.style.display = "block";
   iconPause.style.display = "none";
 }
 
-// PERBAIKAN: Logika klik tombol play menggunakan variabel isPlaying
-playBtn.addEventListener("click", () => {
-  if (audioPlayer.src === "" || !audioPlayer.src.includes("http")) {
-    loadSong(playlist[currentSongIndex]);
+playPauseBtn.addEventListener("click", () => {
+  // Cegah error jika belum ada lagu yang dimuat
+  if (!audioPlayer.src || audioPlayer.src === window.location.href) {
+    loadSongDetails(playlist[currentSongIndex]);
   }
 
   if (isPlaying) {
-    pauseSong();
+    pauseMusic();
   } else {
-    playSong();
+    playMusic();
   }
 });
 
-function nextSong() {
+// 4. Fungsi Lagu Berikutnya & Sebelumnya
+function playNextSong() {
   currentSongIndex++;
   if (currentSongIndex > playlist.length - 1) {
-    currentSongIndex = 0;
+    currentSongIndex = 0; // Kembali ke lagu pertama
   }
-  loadSong(playlist[currentSongIndex]);
-  playSong();
+  loadSongDetails(playlist[currentSongIndex]);
+  playMusic();
 }
 
-function prevSong() {
+function playPrevSong() {
   currentSongIndex--;
   if (currentSongIndex < 0) {
-    currentSongIndex = playlist.length - 1;
+    currentSongIndex = playlist.length - 1; // Pindah ke lagu terakhir
   }
-  loadSong(playlist[currentSongIndex]);
-  playSong();
+  loadSongDetails(playlist[currentSongIndex]);
+  playMusic();
 }
 
-nextBtn.addEventListener("click", nextSong);
-prevBtn.addEventListener("click", prevSong);
-audioPlayer.addEventListener("ended", nextSong);
+nextBtn.addEventListener("click", playNextSong);
+prevBtn.addEventListener("click", playPrevSong);
+audioPlayer.addEventListener("ended", playNextSong); // Otomatis lanjut saat lagu habis
 
+// 5. Fungsi Progress Bar interaktif
 audioPlayer.addEventListener("timeupdate", () => {
-  const { duration, currentTime } = audioPlayer;
+  const duration = audioPlayer.duration;
+  const currentTime = audioPlayer.currentTime;
+
   if (duration) {
     const progressPercent = (currentTime / duration) * 100;
-    progress.style.width = `${progressPercent}%`;
+    progressBar.style.width = `${progressPercent}%`;
   }
 });
 
-progressContainer.addEventListener("click", (e) => {
-  const width = progressContainer.clientWidth;
+progressWrapper.addEventListener("click", (e) => {
+  const width = progressWrapper.clientWidth;
   const clickX = e.offsetX;
   const duration = audioPlayer.duration;
+
   if (duration) {
     audioPlayer.currentTime = (clickX / width) * duration;
   }
 });
 
-renderSongList();
-loadSong(playlist[0]);
+// Inisialisasi awal saat web dimuat
+initPlaylist();
+loadSongDetails(playlist[0]);

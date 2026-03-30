@@ -71,8 +71,9 @@ playBtn.addEventListener("click", () => {
   if (audioPlayer.src === "" || !audioPlayer.src.includes("http")) {
     loadSong(playlist[currentSongIndex]);
   }
-  const isAudioPlaying = playBtn.innerText === "⏸";
-  if (isAudioPlaying) {
+
+  // PERBAIKAN: Gunakan variabel isPlaying untuk mengecek status pemutaran
+  if (isPlaying) {
     pauseSong();
   } else {
     playSong();

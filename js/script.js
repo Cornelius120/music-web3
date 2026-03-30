@@ -1,29 +1,5 @@
 // Kode ini diletakkan di C:\Users\User\Downloads\music-web3\js\script.js
 
-// --- DATABASE LAGU KAMU ---
-// Ganti URL 'src' dengan link langsung dari Catbox atau host lain.
-// Ganti URL 'cover' dengan link gambar album.
-const playlist = [
-  {
-    title: "Lagu Pertama",
-    artist: "Artis A",
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Ganti dengan link catbox kamu
-    cover: "https://via.placeholder.com/150/FF0000/FFFFFF?text=Cover+1",
-  },
-  {
-    title: "Lagu Kedua",
-    artist: "Artis B",
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", // Ganti dengan link catbox kamu
-    cover: "https://via.placeholder.com/150/0000FF/FFFFFF?text=Cover+2",
-  },
-  {
-    title: "Lagu Ketiga",
-    artist: "Artis C",
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", // Ganti dengan link catbox kamu
-    cover: "https://via.placeholder.com/150/00FF00/FFFFFF?text=Cover+3",
-  },
-];
-
 // Elemen DOM
 const songListContainer = document.getElementById("song-list");
 const audioPlayer = document.getElementById("audio-player");
@@ -41,17 +17,20 @@ const playerCover = document.getElementById("player-cover");
 let currentSongIndex = 0;
 let isPlaying = false;
 
-// 1. Tampilkan daftar lagu ke layar utama
+// 1. Tampilkan daftar lagu ke layar utama (Sekarang menampilkan genre juga)
 function renderSongList() {
   songListContainer.innerHTML = "";
+  // Variabel 'playlist' otomatis terbaca dari file data.js
   playlist.forEach((song, index) => {
     const songDiv = document.createElement("div");
     songDiv.classList.add("song-item");
+
+    // Menambahkan elemen span untuk menampilkan genre
     songDiv.innerHTML = `
             <img src="${song.cover}" alt="cover">
-            <div>
+            <div style="flex: 1;">
                 <h4>${song.title}</h4>
-                <p>${song.artist}</p>
+                <p>${song.artist} • <span style="color: #1db954; font-size: 0.75rem;">${song.genre}</span></p>
             </div>
         `;
     // Jika lagu di klik, mainkan lagu tersebut
@@ -76,18 +55,17 @@ function loadSong(song) {
 function playSong() {
   audioPlayer.play();
   isPlaying = true;
-  playBtn.innerText = "⏸"; // Ganti icon jadi pause
+  playBtn.innerText = "⏸";
 }
 
 function pauseSong() {
   audioPlayer.pause();
   isPlaying = false;
-  playBtn.innerText = "▶"; // Ganti icon jadi play
+  playBtn.innerText = "▶";
 }
 
 playBtn.addEventListener("click", () => {
   if (audioPlayer.src === "" || !audioPlayer.src.includes("http")) {
-    // Jika belum ada lagu yang dipilih, muat lagu pertama
     loadSong(playlist[currentSongIndex]);
   }
   const isAudioPlaying = playBtn.innerText === "⏸";
@@ -102,7 +80,7 @@ playBtn.addEventListener("click", () => {
 function nextSong() {
   currentSongIndex++;
   if (currentSongIndex > playlist.length - 1) {
-    currentSongIndex = 0; // Kembali ke awal jika habis
+    currentSongIndex = 0;
   }
   loadSong(playlist[currentSongIndex]);
   playSong();
@@ -111,7 +89,7 @@ function nextSong() {
 function prevSong() {
   currentSongIndex--;
   if (currentSongIndex < 0) {
-    currentSongIndex = playlist.length - 1; // Lompat ke lagu terakhir
+    currentSongIndex = playlist.length - 1;
   }
   loadSong(playlist[currentSongIndex]);
   playSong();
@@ -119,7 +97,6 @@ function prevSong() {
 
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
-// Otomatis next jika lagu selesai
 audioPlayer.addEventListener("ended", nextSong);
 
 // 5. Update Progress Bar
@@ -131,7 +108,6 @@ audioPlayer.addEventListener("timeupdate", () => {
   }
 });
 
-// Klik progress bar untuk melompat
 progressContainer.addEventListener("click", (e) => {
   const width = progressContainer.clientWidth;
   const clickX = e.offsetX;
@@ -143,5 +119,4 @@ progressContainer.addEventListener("click", (e) => {
 
 // Jalankan saat web pertama kali dibuka
 renderSongList();
-// Muat data lagu pertama sebagai standby (tapi tidak autoplay)
 loadSong(playlist[0]);

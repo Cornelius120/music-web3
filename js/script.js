@@ -1,6 +1,5 @@
 // Kode ini diletakkan di C:\Users\User\Downloads\music-web3\js\script.js
 
-// Elemen DOM
 const songListContainer = document.getElementById("song-list");
 const audioPlayer = document.getElementById("audio-player");
 const playBtn = document.getElementById("play-btn");
@@ -8,9 +7,11 @@ const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 const progress = document.getElementById("progress");
 const progressContainer = document.getElementById("progress-container");
-const playIcon = document.getElementById("play-icon");
 
-// Elemen info lagu di player bawah
+// PERBAIKAN: Tangkap elemen SVG Play dan Pause secara terpisah
+const iconPlay = document.getElementById("icon-play");
+const iconPause = document.getElementById("icon-pause");
+
 const playerTitle = document.getElementById("player-title");
 const playerArtist = document.getElementById("player-artist");
 const playerCover = document.getElementById("player-cover");
@@ -18,15 +19,11 @@ const playerCover = document.getElementById("player-cover");
 let currentSongIndex = 0;
 let isPlaying = false;
 
-// 1. Tampilkan daftar lagu ke layar utama (Sekarang menampilkan genre juga)
 function renderSongList() {
   songListContainer.innerHTML = "";
-  // Variabel 'playlist' otomatis terbaca dari file data.js
   playlist.forEach((song, index) => {
     const songDiv = document.createElement("div");
     songDiv.classList.add("song-item");
-
-    // Menambahkan elemen span untuk menampilkan genre
     songDiv.innerHTML = `
             <img src="${song.cover}" alt="cover">
             <div style="flex: 1;">
@@ -34,7 +31,6 @@ function renderSongList() {
                 <p>${song.artist} • <span style="color: #1db954; font-size: 0.75rem;">${song.genre}</span></p>
             </div>
         `;
-    // Jika lagu di klik, mainkan lagu tersebut
     songDiv.addEventListener("click", () => {
       currentSongIndex = index;
       loadSong(playlist[currentSongIndex]);
@@ -44,7 +40,6 @@ function renderSongList() {
   });
 }
 
-// 2. Muat lagu ke audio player
 function loadSong(song) {
   playerTitle.innerText = song.title;
   playerArtist.innerText = song.artist;
@@ -52,27 +47,29 @@ function loadSong(song) {
   audioPlayer.src = song.src;
 }
 
-// 3. Fungsi Play dan Pause
+// 3. PERBAIKAN: Fungsi Play dan Pause menggunakan display none/block
 function playSong() {
   audioPlayer.play();
   isPlaying = true;
-  // Ubah sumber gambar (src) menjadi ikon pause
-  playIcon.src = "icons/pause.svg";
+  // Sembunyikan ikon Play, Tampilkan ikon Pause
+  iconPlay.style.display = "none";
+  iconPause.style.display = "block";
 }
 
 function pauseSong() {
   audioPlayer.pause();
   isPlaying = false;
-  // Ubah sumber gambar (src) kembali menjadi ikon play
-  playIcon.src = "icons/play-button.svg";
+  // Sembunyikan ikon Pause, Tampilkan ikon Play
+  iconPlay.style.display = "block";
+  iconPause.style.display = "none";
 }
 
+// PERBAIKAN: Logika klik tombol play menggunakan variabel isPlaying
 playBtn.addEventListener("click", () => {
   if (audioPlayer.src === "" || !audioPlayer.src.includes("http")) {
     loadSong(playlist[currentSongIndex]);
   }
 
-  // PERBAIKAN: Gunakan variabel isPlaying untuk mengecek status pemutaran
   if (isPlaying) {
     pauseSong();
   } else {
@@ -80,7 +77,6 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-// 4. Tombol Next dan Previous
 function nextSong() {
   currentSongIndex++;
   if (currentSongIndex > playlist.length - 1) {
@@ -103,7 +99,6 @@ nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
 audioPlayer.addEventListener("ended", nextSong);
 
-// 5. Update Progress Bar
 audioPlayer.addEventListener("timeupdate", () => {
   const { duration, currentTime } = audioPlayer;
   if (duration) {
@@ -121,6 +116,5 @@ progressContainer.addEventListener("click", (e) => {
   }
 });
 
-// Jalankan saat web pertama kali dibuka
 renderSongList();
 loadSong(playlist[0]);
